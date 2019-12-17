@@ -61,19 +61,21 @@ app.get('/get/post/:id', (req, res) => {
 //ROTAS Usuario
 app.post('/create/user', (req, res) => {
   //Cria um user
-  const usuario = user.insert(req.body.nome, req.body.email, req.body.senha, req.body.id).then(usuario => res.json(usuario))
+  const usuario = user.insert(req.body.nome, req.body.email, req.body.senha, req.body.id)
+    .then(usuario => res.json(usuario))
 });
 
 app.get('/getAll/users', (req, res) => {
   //Pega todos os users
-  const users = user.getAll().then(users => res.json(users))
+  const users = user.getAll()
+    .then(users => res.json(users))
 });
 
-app.put('/update/user/:id', (req, res) => {
+app.put('/update/user', (req, res) => {
   //Atualiza um user pelo (id)
-  console.log(req.params.id)
+  console.log(req.body.id)
   const usuario = user.update(req.body.nome, req.body.email, req.body.senha, req.body.id)
-    .then(usuario => res.json(usuario))
+    .then(usuario => res.json(usuario.params))
     .catch(err => {console.log(err)})
 });
 
