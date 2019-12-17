@@ -13,7 +13,7 @@ const insert = async (nome,email,senha) => {
 
 //EDITAR
 const update = async (nome,email,id) => {
-
+  
   const verifica = "select * from usuarios where id = $1"
   var result = await db.query(verifica,[id])
   if(!result.rows.length > 0){
