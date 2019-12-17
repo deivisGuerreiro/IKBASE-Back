@@ -61,7 +61,7 @@ app.get('/get/post/:id', (req, res) => {
 //ROTAS Usuario
 app.post('/create/user', (req, res) => {
   //Cria um user
-  const user = user.insert(req.body.nome, req.body.cnpj, req.body.id).then(user => res.json(user))
+  const usuario = user.insert(req.body.nome, req.body.email, req.body.senha, req.body.id).then(usuario => res.json(usuario))
 });
 
 app.get('/getAll/users', (req, res) => {
@@ -71,7 +71,9 @@ app.get('/getAll/users', (req, res) => {
 
 app.put('/update/user', (req, res) => {
   //Atualiza um user pelo (id)
-  const user = user.update(req.body.nome, req.body.cnpj, req.body.id).then(user => res.json(user))
+  const usuario = user.update(req.body.nome, req.body.email, req.body.senha, req.body.id)
+    .then(usuario => res.json(usuario))
+    .catch(err => {console.log(err)})
 });
 
 app.delete('/delete/user/:id', (req, res) => {
@@ -81,10 +83,12 @@ app.delete('/delete/user/:id', (req, res) => {
 
 app.get('/get/user/:id', (req, res) => {
   //Pega as informações de um user pelo (id) que está url
-  const user = user.get(req.params.id).then(user => res.json(user))
+  console.log(req.params.id)
+  const usuario = user.get(req.params.id).then(usuario => res.json(usuario))
 })
 
 //fim ROTAS USER
+
 
 
 
