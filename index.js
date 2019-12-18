@@ -91,7 +91,7 @@ app.put('/update/user', (req, res) => {
     .then(usuario => res.json(usuario.params))
     .catch(err => {
       console.log(err)
-    })
+    }) 
 });
 
 app.delete('/delete/user/:id', (req, res) => {
