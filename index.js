@@ -56,8 +56,9 @@ app.get('/get/post/:id', (req, res) => {
 
 
 //ROTAS Usuario
-app.get('/verifica/user', (req, res) => {
+app.post('/verifica/user', (req, res) => {
   //verifica existencia de user
+  console.log(req.body)
   const usuario = user.userExists(req.body.email)
     .then(usuario => res.send(usuario))
 })
