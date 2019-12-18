@@ -17,7 +17,7 @@ const insert = async (nome,email,senha) => {
   
 }
 
-//SALVAR
+//VERIFICA SE USUÁRIO EXISTE
 const userExists = async (email) => {
   
     const query = "SELECT * FROM usuarios where email = $1"
@@ -80,6 +80,17 @@ const getAll = async() => {
   return result.rows
 }
 
+//lOGIN
+const login = async(email, senha) => {
+  let result
+  
+  const query = "SELECT u.email, u.senha AS senha FROM usuarios AS u WHERE u.email = $1"
+   result = await db.query(query, [email])
+   if(result.rowCount > 0 && bcrypt.compareSync(senha, result.rows[0].senha)) {
+    return true
+  } else return false
+}
+
 module.exports = {
-  getAll,insert,update,deletar,get, encripta, userExists
+  getAll,insert,update,deletar,get, encripta, userExists, login
 } 
