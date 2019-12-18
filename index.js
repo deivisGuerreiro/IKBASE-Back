@@ -76,7 +76,6 @@ app.get('/getAll/users', (req, res) => {
 
 app.put('/update/user', (req, res) => {
   //Atualiza um user pelo (id)
-  console.log(req.body.id)
   const usuario = user.update(req.body.nome, req.body.email, req.body.senha, req.body.id)
     .then(usuario => res.json(usuario.params))
     .catch(err => {
