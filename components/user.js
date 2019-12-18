@@ -1,14 +1,30 @@
 const db = require("../conexao.js")
+const bcrypt = require("bcryptjs")
 
+//CRIPTOGRAFIA DE SENHA
+const encripta = senha => {
+  const salt = bcrypt.genSaltSync(10)
+  return bcrypt.hashSync(senha, salt)
+}
 
 //INSERIR
 const insert = async (nome,email,senha) => {
-
+  
   const query = "insert into usuarios (nome,email,senha) values ($1,$2,$3)"
-  result = await db.query(query,[nome,email,senha])
-
+  result = await db.query(query,[nome,email,encripta(senha)])
   console.log(result.rows);
   return result.rows
+  
+}
+
+//SALVAR
+const userExists = async (email) => {
+  
+    const query = "SELECT * FROM usuarios where email = $1"
+    const userDoBanco = await db.query(query,[email])
+    if(userDoBanco.rowCount > 0) {
+      return true
+    } else return false
 }
 
 //EDITAR
@@ -65,5 +81,5 @@ const getAll = async() => {
 }
 
 module.exports = {
-  getAll,insert,update,deletar,get
+  getAll,insert,update,deletar,get, encripta, userExists
 } 

@@ -59,9 +59,15 @@ app.get('/get/post/:id', (req, res) => {
 
 
 //ROTAS Usuario
+app.get('/verifica/user', (req, res) => {
+  //verifica existencia de user
+  const usuario = user.userExists(req.body.email)
+    .then(usuario => res.send(usuario))
+})
+
 app.post('/create/user', (req, res) => {
   //Cria um user
-  const usuario = user.insert(req.body.nome, req.body.email, req.body.senha, req.body.id)
+  const usuario = user.insert(req.body.nome, req.body.email, req.body.senha)
     .then(usuario => res.json(usuario))
 });
 
