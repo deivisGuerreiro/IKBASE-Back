@@ -36,8 +36,8 @@ const update = async (nome,email,senha, id) => {
     console.log("ITEM INEXISTENTE");
     return "ITEM INEXISTENTE"
   }
-  const query = "update usuarios set nome = $1, email = $2 where id=$3 returning *"
-  result = await db.query(query,[nome,email,id])
+  const query = "update usuarios set nome = $1, email = $2, senha = $3 where id=$4 returning *"
+  result = await db.query(query,[nome,email,encripta(senha),id])
 
   console.log(result.rows);
   return result.rows
