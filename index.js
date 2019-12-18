@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/'));
 
 
 // Constantes dos controllers
@@ -22,10 +21,7 @@ const user = require("./components/user")
 
 //ROTAS IKBASE
 //FEED
-app.get('/', (req, res) => {
-  //Abre a pagina inicial
-  res.sendFile(path.join(__dirname+'/'));
-});
+
 
 app.post('/create/post', (req, res) => {
   //Cria uma postagem
