@@ -1,12 +1,13 @@
 //Configuração do Express.js
 const express = require('express'),
   bodyParser = require('body-parser'),
+  cors = require('cors'),
   app = express(),
   port = 8080;
 
-  const path = require('path');
+const path = require('path');
 
-
+app.use(cors())
 app.use(bodyParser.urlencoded({
   extended: false
 }));
@@ -25,7 +26,7 @@ const user = require("./components/user")
 
 app.post('/create/post', (req, res) => {
   //Cria uma postagem
-  const pastagem = feed.insert(req.body.id_user, req.body.duvida,req.body.tecnologias).then(postagem => res.json(postagem))
+  const pastagem = feed.insert(req.body.id_user, req.body.duvida, req.body.tecnologias).then(postagem => res.json(postagem))
 });
 
 app.get('/getAll/post', (req, res) => {
@@ -78,7 +79,9 @@ app.put('/update/user', (req, res) => {
   console.log(req.body.id)
   const usuario = user.update(req.body.nome, req.body.email, req.body.senha, req.body.id)
     .then(usuario => res.json(usuario.params))
-    .catch(err => {console.log(err)})
+    .catch(err => {
+      console.log(err)
+    })
 });
 
 app.delete('/delete/user/:id', (req, res) => {
@@ -103,7 +106,7 @@ app.get('/get/user/:id', (req, res) => {
 
 app.post('/create/comentario', (req, res) => {
   //Cria um comentario
-  const coment = comentario.insert(req.body.id_postagem, req.body.id_user,req.body.resposta).then(coment => res.json(coment))
+  const coment = comentario.insert(req.body.id_postagem, req.body.id_user, req.body.resposta).then(coment => res.json(coment))
 });
 
 app.get('/getAll/comentario/:id', (req, res) => {
