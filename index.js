@@ -71,6 +71,17 @@ app.post('/create/user', (req, res) => {
     .then(usuario => res.json(usuario))
 });
 
+app.post('/login/user', (req, res) => {
+  //logar usuario
+  let email = req.body.email
+  let senha = req.body.senha
+  if(email && senha){
+    const usuario = user.login(email, senha)
+    .then(usuario => res.send(usuario))
+  }
+  
+})
+
 app.get('/getAll/users', (req, res) => {
   //Pega todos os users
   const users = user.getAll()
