@@ -145,6 +145,11 @@ app.delete('/delete/comentario/:id', (req, res) => {
   const coment = comentario.deletar(req.params.id).then(resposta => res.json(resposta))
 })
 
+//BUSCAR COMENTÁRIOS DE USUÁRIO
+app.get('/getComent/:id_user', (req, res) => {
+  const postUser = comentario.getComentUser(req.params.id_user)
+    .then(resposta => res.json(resposta))
+})
 
 //fim ROTAS COMENTARIO
 

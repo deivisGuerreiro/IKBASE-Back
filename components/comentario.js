@@ -53,18 +53,12 @@ const deletar = async (id) => {
 }
 
 //BUSCAR TODOS COMENTÁRIOS DO USUÁRIO
-const getComentUser = async (id, usuario_id) => {
-  const query = "select * from comentario"
-  result = await db.query(query)
-  for(linha of result.rows) {
-    const queryComentario = "select usuarios.nome, usuarios.email, comentario.resposta, comentario.'data' from usuarios inner join comentario on usuarios.id = $1 and comentario.usuario_id = $2;";
-    coments = await db.query(queryComentario,[id, usuario_id])
-    linha.comentarios = coments.rows
-  }
+const getComentUser = async (id_user) => {
+  const query = "select usuarios.nome, usuarios.email, comentario.resposta, comentario.\"data\" from usuarios inner join comentario on comentario.usuario_id = usuarios.id where usuarios.id = $1;"
+  let result = await db.query(query, [id_user])
   return result.rows
 }
 
-
 module.exports = {
-  getAll,insert,update,deletar
+  getAll,insert,update,deletar, getComentUser
 } 
