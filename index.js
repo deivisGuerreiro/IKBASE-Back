@@ -48,6 +48,12 @@ app.get('/get/post/:id', (req, res) => {
   //Pega as informações de uma postagem pelo (id) que está url
   const postagem = feed.get(req.params.id).then(postagem => res.json(postagem))
 })
+
+//BUSCAR PUBLICAÇÃO DE USUÁRIO
+app.get('/getPost/:id_user', (req, res) => {
+  const postUser = feed.getPostUser(req.params.id_user)
+    .then(resposta => res.json(resposta))
+})
 //fim ROTAS FEED
 
 

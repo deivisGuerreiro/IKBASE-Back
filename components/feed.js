@@ -87,7 +87,13 @@ const get = async (id) => {
   return result.rows
   
 }
+//BUSCAR TODAS PUBLICAÇÕES DO USUARIO
+const getPostUser = async (id_user) => {
+  const query = "select usuarios.nome, usuarios.email, postagem.duvida, postagem.\"data\" from usuarios inner join postagem on postagem.usuario_id=usuarios.id where usuarios.id= $1;"
+  let result = await db.query(query,[id_user])
+  return result.rows
+}
 
 module.exports = {
-  getAll,insert,update,deletar,get
+  getAll,insert,update,deletar,get, getPostUser
 } 
