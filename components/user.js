@@ -71,9 +71,9 @@ const get = async (id) => {
 //BUSCAR POR NOME
 const getByName = async (nome) => {
   let result
-  const query = "SELECT nome FROM usuarios WHERE nome = $1"
-  result = await db.query(query, [nome])
-
+  let novoNome = '%' + nome + '%'
+  const query = "SELECT * FROM usuarios WHERE nome ILIKE $1"
+  result = await db.query(query, [novoNome])
   return result.rows
 }
 
