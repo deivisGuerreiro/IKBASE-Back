@@ -10,7 +10,7 @@ const encripta = senha => {
 //INSERIR
 const insert = async (nome,email,senha) => {
   
-  const query = "insert into usuarios (nome,email,senha) values ($1,$2,$3)"
+  const query = "INSERT INTO usuarios (nome,email,senha) VALUES ($1,$2,$3)"
   result = await db.query(query,[nome,email,encripta(senha)])
   console.log(result.rows);
   return result.rows
@@ -20,7 +20,7 @@ const insert = async (nome,email,senha) => {
 //VERIFICA SE USUÁRIO EXISTE
 const userExists = async (email) => {
   
-    const query = "SELECT * FROM usuarios where email = $1"
+    const query = "SELECT * FROM usuarios WHERE email = $1"
     const userDoBanco = await db.query(query,[email])
     if(userDoBanco.rowCount > 0) {
       return true
@@ -30,13 +30,13 @@ const userExists = async (email) => {
 //EDITAR
 const update = async (nome,email,senha, id) => {
   
-  const verifica = "select * from usuarios where id = $1"
+  const verifica = "SELECT * FROM usuarios WHERE id = $1"
   var result = await db.query(verifica,[id])
   if(!result.rows.length > 0){
     console.log("ITEM INEXISTENTE");
     return "ITEM INEXISTENTE"
   }
-  const query = "update usuarios set nome = $1, email = $2, senha = $3 where id=$4 returning *"
+  const query = "UPDATE usuarios SET nome = $1, email = $2, senha = $3 WHERE id=$4 RETURNING *"
   result = await db.query(query,[nome,email,encripta(senha),id])
 
   console.log(result.rows);
@@ -46,13 +46,13 @@ const update = async (nome,email,senha, id) => {
 //DELETAR
 const deletar = async (id) => {
 
-  const verifica = "select * from usuarios where id = $1"
+  const verifica = "SELECT * FROM usuarios WHERE id = $1"
   var result = await db.query(verifica,[id])
   if(!result.rows.length > 0){
     console.log("ITEM INEXISTENTE");
     return "ITEM INEXISTENTE"
   }
-  const query = "delete from usuarios where id=$1"
+  const query = "DELETE FROM usuarios WHERE id=$1"
   await db.query(query,[id])
 
   console.log("ITEM DELETADO");
@@ -62,12 +62,19 @@ const deletar = async (id) => {
 //BUSCAR POR ID
 const get = async (id) => {
   var result
-  const query = "select * from usuarios where id = $1";
+  const query = "SELECT * FROM usuarios WHERE id = $1";
   result = await db.query(query,[id])
 
+  return result.rows
+}
+
+//BUSCAR POR NOME
+const getByName = async (nome) => {
+  let result
+  const query = "SELECT nome FROM usuarios WHERE nome = $1"
+  result = await db.query(query, [nome])
 
   return result.rows
-  
 }
 
 //BUSCAR TODOS
@@ -92,5 +99,5 @@ const login = async(email, senha) => {
 }
 
 module.exports = {
-  getAll,insert,update,deletar,get, encripta, userExists, login
+  getAll,insert,update,deletar,get, encripta, userExists, login, getByName
 } 

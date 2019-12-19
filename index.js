@@ -105,6 +105,10 @@ app.get('/get/user/:id', (req, res) => {
   const usuario = user.get(req.params.id).then(usuario => res.json(usuario))
 })
 
+app.get('/get/nome/:nome', (req, res) => {
+  //Busca usuário por nome
+  const usuario = user.getByName(req.params.nome).then(usuario => res.json(usuario))
+})
 //fim ROTAS USER
 
 
