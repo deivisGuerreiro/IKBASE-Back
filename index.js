@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 const feed = require("./components/feed")
 const comentario = require("./components/comentario")
 const user = require("./components/user")
+const tecnologias = require("./components/tecnologias")
 
 //ROTAS IKBASE
 //FEED
@@ -152,6 +153,30 @@ app.get('/getComent/:id_user', (req, res) => {
 })
 
 //fim ROTAS COMENTARIO
+
+
+
+//TECNOLOGIAS
+
+app.get('/get/tecs', (req, res) => {
+  const tecs = tecnologias.getAll()
+    .then(tecs => res.json(tecs))
+})
+
+app.get('/get/tec/:id', (req, res) => {
+  const tec = tecnologias.get(req.params.id)
+    .then(tec => res.json(tec))
+})
+
+app.get('/get/tecn/:nome', (req, res) => {
+  const tecn = tecnologias.getByName(req.params.nome)
+    .then(tecn => res.json(tecn))
+})
+
+app.post('/post/tec', (req, res) => {
+  const tecno = tecnologias.insertTecnologia(req.body.nome)
+    .then(tecno => res.json(tecno))
+})
 
 
 //Executa o servidor
