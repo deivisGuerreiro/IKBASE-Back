@@ -21,7 +21,8 @@ const insert = async (nome, email, senha) => {
 //VERIFICA SE USUÁRIO EXISTE
 const userExists = async (email) => {
 
-  const query = "SELECT * FROM usuarios WHERE email = $1"
+  const query = "select usuarios.id, usuarios.nome, usuarios.email from usuarios where email = $1"
+  //const query = "SELECT * FROM usuarios WHERE email = $1"
   const userDoBanco = await db.query(query, [email])
   if (userDoBanco.rowCount > 0) {
     return true
@@ -63,7 +64,8 @@ const deletar = async (id) => {
 //BUSCAR POR ID
 const get = async (id) => {
   var result
-  const query = "SELECT * FROM usuarios WHERE id = $1";
+  const query = "select usuarios.nome, usuarios.email from usuarios where id = $1"
+  //const query = "SELECT * FROM usuarios WHERE id = $1";
   result = await db.query(query, [id])
 
   return result.rows
@@ -73,7 +75,8 @@ const get = async (id) => {
 const getByName = async (nome) => {
   let result
   let novoNome = '%' + nome + '%'
-  const query = "SELECT * FROM usuarios WHERE nome ILIKE $1"
+  const query = "select usuarios.nome, usuarios.email from usuarios where nome ILIKE $1"
+  //const query = "SELECT * FROM usuarios WHERE nome ILIKE $1"
   result = await db.query(query, [novoNome])
   return result.rows
 }
@@ -81,7 +84,7 @@ const getByName = async (nome) => {
 //BUSCAR TODOS
 const getAll = async () => {
   var result
-  const query = " SELECT * FROM  usuarios"
+  const query = " SELECT usuarios.id, usuarios.nome, usuarios.email FROM  usuarios"
 
   result = await db.query(query)
 
