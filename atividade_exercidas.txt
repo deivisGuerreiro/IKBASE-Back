@@ -1,0 +1,10 @@
+DEIVIS FELIPE GUERREIRO FAGUNDES
+
+
+DIORGE ANDREI NUNES
+-diagrama banco de dados
+-banco de dados
+-todas funções e rotas de services de usuário
+-funções e rotas de tecnologias
+-função de buscar todas publicações de um usuário no feed
+-função de buscar todas os comentários de um usuário
