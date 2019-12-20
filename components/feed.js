@@ -2,7 +2,7 @@ const db = require("../conexao.js")
 
 const getAll = async () => {
 
-  const query = "select * from postagem "
+  const query = "select postagem.id,postagem.duvida,postagem.data,usuarios.nome from postagem inner join usuarios on postagem.usuario_id = usuarios.id"
   result = await db.query(query)
   for(linha of result.rows){
     const query2 = "select * from postagem_tecnologia where postagem_id = $1";
@@ -75,7 +75,7 @@ const deletar = async (id) => {
 const get = async (id) => {
 
   var result
-  const query = "select * from postagem where id = $1";
+  const query = "select postagem.id,postagem.duvida,postagem.data,usuarios.nome from postagem inner join usuarios on postagem.usuario_id = usuarios.id where postagem.id = $1";
   result = await db.query(query,[id])
   const query2 = "select * from postagem_tecnologia where postagem_id = $1";
   result2 = await db.query(query2,[id])
