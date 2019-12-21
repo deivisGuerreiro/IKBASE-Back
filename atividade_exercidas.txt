@@ -8,3 +8,13 @@ DIORGE ANDREI NUNES
 -funções e rotas de tecnologias
 -função de buscar todas publicações de um usuário no feed
 -função de buscar todas os comentários de um usuário
+
+
+Deivis Felipe
+- estrutura do projeto
+- Ajuda na criação do banco de dados
+- Configuração das rotas e criação das rotas postagens, usuario e comentarios
+- Controller feed.js
+- Controller user.js
+- Controller comentarios.js
+- Configuração do projeto
