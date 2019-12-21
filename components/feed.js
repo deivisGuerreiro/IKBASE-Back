@@ -5,7 +5,7 @@ const getAll = async () => {
   const query = "select postagem.id,postagem.duvida,postagem.data,usuarios.nome from postagem inner join usuarios on postagem.usuario_id = usuarios.id"
   result = await db.query(query)
   for(linha of result.rows){
-    const query2 = "select * from postagem_tecnologia where postagem_id = $1";
+    const query2 = "select tecnologia.nome from postagem_tecnologia inner join tecnologia on tecnologia.id = postagem_tecnologia.tecnologia_id where postagem_id = $1";
     result2 = await db.query(query2,[linha.id])
     linha.tecnologias =result2.rows
     const queryComentario = "select * from comentario where postagem_id = $1";
@@ -77,10 +77,10 @@ const get = async (id) => {
   var result
   const query = "select postagem.id,postagem.duvida,postagem.data,usuarios.nome from postagem inner join usuarios on postagem.usuario_id = usuarios.id where postagem.id = $1";
   result = await db.query(query,[id])
-  const query2 = "select * from postagem_tecnologia where postagem_id = $1";
+  const query2 = "select tecnologia.nome from postagem_tecnologia inner join tecnologia on tecnologia.id = postagem_tecnologia.tecnologia_id where postagem_id = $1";
   result2 = await db.query(query2,[id])
   result.rows[0].tecnologias =result2.rows
-  const queryComentario = "select * from comentario where postagem_id = $1";
+  const queryComentario = "select usuarios.nome,comentario.resposta,comentario.data from comentario inner join usuarios on usuarios.id = comentario.usuario_id where postagem_id = $1";
   coments = await db.query(queryComentario,[id])
   result.rows[0].comentarios =coments.rows
 
