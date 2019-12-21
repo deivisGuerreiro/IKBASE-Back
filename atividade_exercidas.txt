@@ -1,5 +1,3 @@
-DEIVIS FELIPE GUERREIRO FAGUNDES
-
 
 DIORGE ANDREI NUNES
 -diagrama banco de dados
@@ -10,7 +8,7 @@ DIORGE ANDREI NUNES
 -função de buscar todas os comentários de um usuário
 
 
-Deivis Felipe
+DEIVIS FELIPE GUERREIRO FAGUNDES
 - estrutura do projeto
 - Ajuda na criação do banco de dados
 - Configuração das rotas e criação das rotas postagens, usuario e comentarios
